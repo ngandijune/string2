@@ -35,9 +35,14 @@
 ";
 //to break string to array
 $rewind1_array= explode('|',$rewind1);
+$rewind1_array2=[];
 
 //print_r($rewind1_array);
-//$myJSON = json_encode($rewind1_array);
+foreach ($rewind1_array as $result1){
+ $rewind1_array2['part1']= explode(',',$result1);
+
+}
+echo json_encode($rewind1_array2);
 
 
 //print_r($myJSON);
@@ -48,6 +53,22 @@ $rewind1_array= explode('|',$rewind1);
 
 
 //echo json_encode($array_one);
+
+function comma_separated_to_array($string, $separator = '.')
+{
+ //Explode on comma
+ $vals = explode($separator, $string);
+
+ //Trim whitespace
+ foreach($vals as $key => $val) {
+  $vals[$key] = trim($val);
+ }
+ //Return empty array if no items found
+ //http://php.net/manual/en/function.explode.php#114273
+ return array_diff($vals, array(""));
+}
+
+$array_one = comma_separated_to_array($rewind1);
 ?>
 <html>
 <head>
@@ -58,26 +79,12 @@ ol {list-style: lower-alpha;}
 <ol>
 <?php
 foreach($rewind1_array as $rewind1){
- $values = parse_url($rewind1);
-// foreach ($values as $part){
-//  echo json_encode($part);
-// }
- $rewind2= explode("'",$rewind1);
-// echo json_encode($rewind2);
-  foreach ($rewind2 as $part){
-   ?>
-     <li><?php echo $part; ?></li>
-<!--  echo json_encode($part);-->
-   <?php
- }
- ?>
+?>
 
-<!--  <li>--><?php //echo $rewind1; ?><!--</li>-->
+<!--  <li>--><?php //echo $rewind1[2]; ?><!--</li>-->
 <?php } ?>
 
 </ol>
 </body>
 </html>
-<?php
 
-?>
